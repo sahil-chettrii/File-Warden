@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">File Warden</title>
+  <defs>
+    <linearGradient id="shield" x1="10" y1="8" x2="54" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0878ff"/>
+      <stop offset="0.52" stop-color="#12d9f2"/>
+      <stop offset="1" stop-color="#1747ff"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="22" y1="18" x2="43" y2="47" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f8fdff"/>
+      <stop offset="1" stop-color="#bcefff"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#080d19"/>
+  <path d="M32 6.5 52 14v15.5c0 13.1-8.3 22.6-20 28C20.3 52.1 12 42.6 12 29.5V14L32 6.5Z"
+        fill="#0b1830" stroke="url(#shield)" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="M24 19h11l8 8v18H21V22a3 3 0 0 1 3-3Z"
+        fill="url(#paper)" stroke="#27dff4" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M35 19v7a2 2 0 0 0 2 2h6" fill="none" stroke="#0878ff" stroke-width="1.7" stroke-linejoin="round"/>
+  <path d="M26 33h12M26 38h12M26 43h8" fill="none" stroke="#1258c8" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
