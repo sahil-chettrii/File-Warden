@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { createScan } from "../mock/scanStore";
 
 const MAX_MB = 50; // UI-only limit. The Node API must enforce the real one.
 
@@ -30,6 +32,7 @@ function Icon({ children, size = 18 }) {
 }
 
 function FilePanel() {
+  const navigate = useNavigate();
   const inputRef = useRef(null);
   const dragDepth = useRef(0);
   const [file, setFile] = useState(null);
@@ -51,6 +54,12 @@ function FilePanel() {
     setFile(null);
     setError("");
     if (inputRef.current) inputRef.current.value = "";
+  };
+
+  const startScan = () => {
+    if (!file) return;
+    const scan = createScan({ type: "file", name: file.name, size: file.size });
+    navigate(`/scan/${scan.id}`);
   };
 
   const onDrop = (e) => {
@@ -102,7 +111,7 @@ function FilePanel() {
           <p className="mt-1 text-xs text-slate-400">{formatSize(file.size)}</p>
           <div className="mt-4 flex gap-3">
             <button
-              onClick={() => console.log("Scan this file:", file)} // Step 3 connects this
+              onClick={startScan}
               className="rounded-lg bg-primary px-6 py-2.5 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-500 hover:shadow-[0_0_28px_rgba(59,130,246,0.6)] active:translate-y-0"
             >
               Scan File
@@ -136,6 +145,7 @@ function FilePanel() {
 }
 
 function SitePanel() {
+  const navigate = useNavigate();
   const [url, setUrl] = useState("");
   const [error, setError] = useState("");
 
@@ -145,7 +155,8 @@ function SitePanel() {
       const u = new URL(url.trim());
       if (!["http:", "https:"].includes(u.protocol)) throw new Error();
       setError("");
-      console.log("Scan this website:", u.href); // connected in a later step
+      const scan = createScan({ type: "url", name: u.href });
+      navigate(`/scan/${scan.id}`);
     } catch {
       setError("Enter a valid link starting with http:// or https://");
     }
@@ -215,7 +226,6 @@ export default function Hero() {
         </p>
 
         <div className="mt-12 w-full animate-fade-up text-left" style={{ animationDelay: "700ms" }}>
-          {/* Tabs */}
           <div role="tablist" className="relative grid grid-cols-2 border-b border-white/10">
             {TABS.map((t) => (
               <button
@@ -237,8 +247,7 @@ export default function Hero() {
             />
           </div>
 
-          {/* Panel: key restarts the animation on every tab change */}
-         <div role="tabpanel" className="mt-6">
+          <div role="tabpanel" className="mt-6">
             {tab === "file" ? <FilePanel /> : <SitePanel />}
           </div>
         </div>

@@ -8,6 +8,7 @@ import Features from "./pages/Features";
 import About from "./pages/About";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ScanProgress from "./pages/ScanProgress";
 import NotFound from "./pages/NotFound";
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/scan/:id" element={<ScanProgress />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
